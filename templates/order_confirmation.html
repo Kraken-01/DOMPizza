@@ -1,0 +1,318 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed - DOM Pizza</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .confirmation-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--success-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            animation: scaleIn 0.5s ease;
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .success-icon svg {
+            width: 50px;
+            height: 50px;
+            color: white;
+        }
+        
+        .confirmation-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+        
+        .confirmation-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray-text);
+            margin-bottom: 3rem;
+        }
+        
+        .order-details-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+        
+        .order-detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .order-detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .order-detail-label {
+            color: var(--gray-text);
+            font-weight: 500;
+        }
+        
+        .order-detail-value {
+            color: var(--light-text);
+            font-weight: 600;
+        }
+        
+        .order-items-list {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--border-color);
+        }
+        
+        .order-items-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+        
+        .order-item-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            color: var(--gray-text);
+        }
+        
+        .order-total {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .order-total .total-label {
+            color: var(--light-text);
+        }
+        
+        .order-total .total-amount {
+            color: var(--primary-red);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .btn-secondary {
+            background-color: var(--card-bg);
+            border: 2px solid var(--border-color);
+            color: var(--light-text);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--card-hover);
+            border-color: var(--light-text);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-red);
+            border: none;
+            color: var(--light-text);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-red-hover);
+        }
+        
+        .info-box {
+            background-color: rgba(0, 168, 107, 0.1);
+            border-left: 4px solid var(--success-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            text-align: left;
+        }
+        
+        .info-box-title {
+            font-weight: 600;
+            color: var(--light-text);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .info-box-text {
+            color: var(--gray-text);
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 640px) {
+            .confirmation-title {
+                font-size: 2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="{% url 'pizza_menu:menu' %}" style="text-decoration: none;">
+                    <h1 class="logo">DOM Pizza</h1>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="confirmation-container">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="currentColor"/>
+                </svg>
+            </div>
+            
+            <h1 class="confirmation-title">Order Confirmed!</h1>
+            <p class="confirmation-subtitle">Thank you for your order. We're preparing your food now.</p>
+            
+            <div class="order-details-card">
+                <div class="order-detail-row">
+                    <span class="order-detail-label">Order Number</span>
+                    <span class="order-detail-value">#{{ order.id }}</span>
+                </div>
+                <div class="order-detail-row">
+                    <span class="order-detail-label">Order Type</span>
+                    <span class="order-detail-value">{{ order.get_order_type_display }}</span>
+                </div>
+                <div class="order-detail-row">
+                    <span class="order-detail-label">Customer Name</span>
+                    <span class="order-detail-value">{{ order.customer_name }}</span>
+                </div>
+                <div class="order-detail-row">
+                    <span class="order-detail-label">Email</span>
+                    <span class="order-detail-value">{{ order.customer_email }}</span>
+                </div>
+                <div class="order-detail-row">
+                    <span class="order-detail-label">Phone</span>
+                    <span class="order-detail-value">{{ order.customer_phone }}</span>
+                </div>
+                <div class="order-detail-row">
+                    <span class="order-detail-label">Order Date</span>
+                    <span class="order-detail-value">{{ order.created_at|date:"F d, Y g:i A" }}</span>
+                </div>
+                
+                <div class="order-items-list">
+                    <h3 class="order-items-title">Your Items</h3>
+                    {% for item in order.items.all %}
+                    <div class="order-item-row">
+                        <span>{{ item.quantity }}x {{ item.menu_item.name }}</span>
+                        <span>${{ item.price|floatformat:2 }}</span>
+                    </div>
+                    {% endfor %}
+                    
+                    <div class="order-total">
+                        <span class="total-label">Total</span>
+                        <span class="total-amount">${{ order.total|floatformat:2 }}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <div class="info-box-title">
+                    {% if order.order_type == 'PICKUP' %}
+                    🍕 Ready for Pickup
+                    {% else %}
+                    🚚 Out for Delivery
+                    {% endif %}
+                </div>
+                <p class="info-box-text">
+                    {% if order.order_type == 'PICKUP' %}
+                    Your order will be ready in approximately 15-20 minutes. We'll send you an email confirmation at {{ order.customer_email }}.
+                    {% else %}
+                    Your order will be delivered in approximately 30-45 minutes. We'll send you updates via email at {{ order.customer_email }}.
+                    {% endif %}
+                </p>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="{% url 'pizza_menu:menu' %}" class="btn-secondary">Back to Menu</a>
+                <a href="{% url 'pizza_menu:menu' %}" class="btn-primary" onclick="clearCart()">Order More</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-copyright">© 2025 DOM Pizza. Built with Django.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Clear cart on page load (order is complete)
+        localStorage.removeItem('cart');
+        
+        function clearCart() {
+            localStorage.removeItem('cart');
+        }
+    </script>
+</body>
+</html>
+

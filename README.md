@@ -4,14 +4,14 @@ A modern, beautiful pizza ordering website built with Django, inspired by MOD Pi
 
 ## Features
 
-- 🍕 Beautiful, responsive menu display
-- 🛒 Interactive shopping cart with localStorage persistence
-- 📱 Mobile-friendly design
-- 🎨 Modern dark theme UI
-- ⚡ Smooth animations and transitions
-- 📦 Multiple menu categories (Pizza, Salads, Sides, Beverages, Desserts)
-- 🏷️ Special tags for deals and top picks
-- 🎯 Sticky navigation with smooth scrolling
+- Beautiful, responsive menu display
+- Interactive shopping cart with localStorage persistence
+- Mobile-friendly design
+- Modern dark theme UI
+- Smooth animations and transitions
+- Multiple menu categories (Pizza, Salads, Sides, Beverages, Desserts)
+- Special tags for deals and top picks
+- Sticky navigation with smooth scrolling
 
 ## Setup Instructions
 

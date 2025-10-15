@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Pizza - Unlimited Toppings</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <h1 class="logo">DOM Pizza</h1>
+                <div class="location-selector">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 0C5.24 0 3 2.24 3 5C3 8.5 8 14 8 14C8 14 13 8.5 13 5C13 2.24 10.76 0 8 0ZM8 6.5C7.17 6.5 6.5 5.83 6.5 5C6.5 4.17 7.17 3.5 8 3.5C8.83 3.5 9.5 4.17 9.5 5C9.5 5.83 8.83 6.5 8 6.5Z" fill="currentColor"/>
+                    </svg>
+                    <span class="location-text">1575 Garden of the Gods Road, Suite 100 · Colorado Springs, CO 80907</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="order-type">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 2L3 7V17H8V12H12V17H17V7L10 2Z" fill="currentColor"/>
+                    </svg>
+                    <span>Pickup</span>
+                    <span class="order-time">— Today, ASAP</span>
+                </div>
+                <button class="btn-signin">Sign In/Join</button>
+                <button class="cart-btn" id="cartBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M7 18C5.9 18 5.01 18.9 5.01 20C5.01 21.1 5.9 22 7 22C8.1 22 9 21.1 9 20C9 18.9 8.1 18 7 18ZM1 2V4H3L6.6 11.59L5.25 14.04C5.09 14.32 5 14.65 5 15C5 16.1 5.9 17 7 17H19V15H7.42C7.28 15 7.17 14.89 7.17 14.75L7.2 14.63L8.1 13H15.55C16.3 13 16.96 12.59 17.3 11.97L20.88 5.48C20.96 5.34 21 5.17 21 5C21 4.45 20.55 4 20 4H5.21L4.27 2H1ZM17 18C15.9 18 15.01 18.9 15.01 20C15.01 21.1 15.9 22 17 22C18.1 22 19 21.1 19 20C19 18.9 18.1 18 17 18Z" fill="currentColor"/>
+                    </svg>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-menu" id="navMenu">
+        <div class="nav-container">
+            {% for category in categories %}
+            <a href="#{{ category.name|slugify }}" class="nav-link">{{ category.name }}</a>
+            {% endfor %}
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-container">
+            {% for category in categories %}
+            <section class="menu-section" id="{{ category.name|slugify }}">
+                <h2 class="section-title">{{ category.name }}</h2>
+                {% if category.description %}
+                <p class="section-description">{{ category.description }}</p>
+                {% endif %}
+                
+                <div class="menu-grid">
+                    {% for item in category.items.all %}
+                    <div class="menu-item" data-item-id="{{ item.id }}">
+                        {% if item.image %}
+                        <div class="item-image">
+                            <img src="{{ item.image }}" alt="{{ item.name }}" loading="lazy">
+                        </div>
+                        {% endif %}
+                        
+                        <div class="item-content">
+                            <div class="item-header">
+                                {% if item.tag %}
+                                <span class="item-tag {% if item.tag == 'TOP_PICK' %}tag-top-pick{% else %}tag-deal{% endif %}">
+                                    {{ item.get_tag_display|upper }}
+                                </span>
+                                {% endif %}
+                            </div>
+                            
+                            <h3 class="item-name">{{ item.name }}</h3>
+                            <p class="item-description">{{ item.description }}</p>
+                            
+                            <div class="item-footer">
+                                {% if item.price %}
+                                <div class="item-price-info">
+                                    <span class="item-price">${{ item.price }}</span>
+                                    {% if item.calories %}
+                                    <span class="item-calories">{{ item.calories }} Cals</span>
+                                    {% endif %}
+                                </div>
+                                {% endif %}
+                                <button class="btn-add-item" onclick="addToCart({{ item.id }}, '{{ item.name }}', {{ item.price }})">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p class="no-items">No items in this category yet.</p>
+                    {% endfor %}
+                </div>
+            </section>
+            {% endfor %}
+        </div>
+    </main>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Your Cart</h2>
+                <button class="btn-close" onclick="closeCart()">&times;</button>
+            </div>
+            <div class="modal-body" id="cartItems">
+                <p class="empty-cart">Your cart is empty</p>
+            </div>
+            <div class="modal-footer">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span class="total-amount" id="cartTotal">$0.00</span>
+                </div>
+                <a href="{% url 'pizza_menu:checkout' %}" class="btn-checkout" id="checkoutBtn">Checkout</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">CA - Do Not Sell My Personal Information</a>
+            </div>
+            <p class="footer-copyright">© 2025 DOM Pizza. Built with Django.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
+
