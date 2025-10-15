@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: dompizza
+    env: python
+    region: oregon
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn DOMPizza.wsgi:application --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: DEBUG
+        value: False
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_HOSTS
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: dompizza-db
+          property: connectionString
+
+databases:
+  - name: dompizza-db
+    databaseName: dompizza
+    user: dompizza
+    region: oregon
+
