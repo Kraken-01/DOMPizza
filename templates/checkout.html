@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - DOM Pizza</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <a href="{% url 'pizza_menu:menu' %}" style="text-decoration: none;">
+                    <h1 class="logo">DOM Pizza</h1>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="checkout-content">
+        <div class="checkout-container">
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="step active">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Cart</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step active">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Details</div>
+                </div>
+                <div class="step-line"></div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Payment</div>
+                </div>
+            </div>
+
+            <div class="checkout-grid">
+                <!-- Left Column - Form -->
+                <div class="checkout-form-section">
+                    <h2 class="section-heading">Your Information</h2>
+                    
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post" id="checkoutForm">
+                        {% csrf_token %}
+                        <input type="hidden" name="cart_data" id="cartData">
+                        
+                        <!-- Order Type -->
+                        <div class="form-section">
+                            <h3 class="form-section-title">Order Type</h3>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="order_type" value="PICKUP" checked>
+                                    <div class="radio-card">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M12 3L4 9V21H9V15H15V21H20V9L12 3Z" fill="currentColor"/>
+                                        </svg>
+                                        <div>
+                                            <div class="radio-title">Pickup</div>
+                                            <div class="radio-subtitle">Ready in 15-20 minutes</div>
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="order_type" value="DELIVERY">
+                                    <div class="radio-card">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M19 7H16V4H3C1.9 4 1 4.9 1 6V15H3C3 16.66 4.34 18 6 18C7.66 18 9 16.66 9 15H15C15 16.66 16.34 18 18 18C19.66 18 21 16.66 21 15H23V12L19 7ZM6 16C5.45 16 5 15.55 5 15C5 14.45 5.45 14 6 14C6.55 14 7 14.45 7 15C7 15.55 6.55 16 6 16ZM19 9.5L21.5 12H16V9H19V9.5ZM18 16C17.45 16 17 15.55 17 15C17 14.45 17.45 14 18 14C18.55 14 19 14.45 19 15C19 15.55 18.55 16 18 16Z" fill="currentColor"/>
+                                        </svg>
+                                        <div>
+                                            <div class="radio-title">Delivery</div>
+                                            <div class="radio-subtitle">30-45 minutes</div>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Contact Information -->
+                        <div class="form-section">
+                            <h3 class="form-section-title">Contact Information</h3>
+                            <div class="form-group">
+                                <label for="id_customer_name">Full Name *</label>
+                                {{ form.customer_name }}
+                                {% if form.customer_name.errors %}
+                                    <span class="error-text">{{ form.customer_name.errors.0 }}</span>
+                                {% endif %}
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="id_customer_email">Email *</label>
+                                    {{ form.customer_email }}
+                                    {% if form.customer_email.errors %}
+                                        <span class="error-text">{{ form.customer_email.errors.0 }}</span>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="id_customer_phone">Phone *</label>
+                                    {{ form.customer_phone }}
+                                    {% if form.customer_phone.errors %}
+                                        <span class="error-text">{{ form.customer_phone.errors.0 }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Delivery Address (conditionally shown) -->
+                        <div class="form-section" id="deliverySection" style="display: none;">
+                            <h3 class="form-section-title">Delivery Address</h3>
+                            <div class="form-group">
+                                <label for="id_delivery_address">Address *</label>
+                                {{ form.delivery_address }}
+                            </div>
+                        </div>
+
+                        <!-- Special Instructions -->
+                        <div class="form-section">
+                            <h3 class="form-section-title">Special Instructions</h3>
+                            <div class="form-group">
+                                <label for="id_special_instructions">Anything we should know?</label>
+                                {{ form.special_instructions }}
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-submit">
+                            <span>Place Order</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M10 0L8.59 1.41L15.17 8H0V10H15.17L8.59 16.59L10 18L20 10L10 0Z" fill="currentColor"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right Column - Order Summary -->
+                <div class="order-summary-section">
+                    <div class="order-summary-sticky">
+                        <h2 class="section-heading">Order Summary</h2>
+                        
+                        <div class="summary-items" id="summaryItems">
+                            <!-- Will be populated by JavaScript -->
+                        </div>
+
+                        <div class="summary-totals">
+                            <div class="summary-row">
+                                <span>Subtotal</span>
+                                <span id="summarySubtotal">$0.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Tax (8%)</span>
+                                <span id="summaryTax">$0.00</span>
+                            </div>
+                            <div class="summary-row summary-total">
+                                <span>Total</span>
+                                <span id="summaryTotal">$0.00</span>
+                            </div>
+                        </div>
+
+                        <div class="summary-info">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M8 0C3.6 0 0 3.6 0 8C0 12.4 3.6 16 8 16C12.4 16 16 12.4 16 8C16 3.6 12.4 0 8 0ZM8.8 12H7.2V7.2H8.8V12ZM8.8 5.6H7.2V4H8.8V5.6Z" fill="currentColor"/>
+                            </svg>
+                            <p>Your order will be prepared fresh and ready at the selected time.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-copyright">© 2025 DOM Pizza. Built with Django.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/checkout.js' %}"></script>
+</body>
+</html>
