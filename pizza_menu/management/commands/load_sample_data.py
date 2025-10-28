@@ -14,7 +14,7 @@ class Command(BaseCommand):
         
         # Create Categories
         categories = [
-            {'name': 'Dinner and a Movie', 'description': 'Perfect combo meals for your evening', 'order': 1},
+            {'name': 'Din and a Movie', 'description': 'Perfect combo meals for your evening', 'order': 1},
             {'name': 'Pizza', 'description': 'Create Your Own With Unlimited Toppings...Or Save Some $$ With Our Everyday Pizza Deals...Or Customize One Of Our Signature Pizzas', 'order': 2},
             {'name': 'Salads', 'description': 'Create Your Own With Unlimited Toppings, Or Customize One Of Our Signature Salads', 'order': 3},
             {'name': 'Kids Meal', 'description': 'Because parents shouldn\'t have to share their pizza', 'order': 4},
@@ -31,7 +31,7 @@ class Command(BaseCommand):
         menu_items = [
             # Dinner and a Movie
             {
-                'category': 'Din Din and a Movie',
+                'category': 'Dinner and a Movie',
                 'name': 'Pizza for 2 Combo',
                 'description': 'Customize two MOD-sized pizzas with unlimited toppings for one price. Choose from over 40 toppings and 8 finishing sauces! Includes your choice of two 20oz Coca-Cola bottled beverages.',
                 'price': 29.99,
