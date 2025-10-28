@@ -14,7 +14,7 @@ class Command(BaseCommand):
         
         # Create Categories
         categories = [
-            {'name': 'Din and a Movie', 'description': 'combo meals for your evening', 'order': 1},
+            {'name': 'Dinner and a Movie', 'description': 'combo meals for your evening', 'order': 1},
             {'name': 'Pizza', 'description': 'Create Your Own With Unlimited Toppings...Or Save Some $$ With Our Everyday Pizza Deals...Or Customize One Of Our Signature Pizzas', 'order': 2},
             {'name': 'Salads', 'description': 'Create Your Own With Unlimited Toppings, Or Customize One Of Our Signature Salads', 'order': 3},
             {'name': 'Kids Meal', 'description': 'Because parents shouldn\'t have to share their pizza', 'order': 4},
