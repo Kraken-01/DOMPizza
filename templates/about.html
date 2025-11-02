@@ -10,64 +10,47 @@
         :root {
             --primary-red: #e31837;
             --dark-bg: #1a1a1a;
-            --light-bg: #f5f5f5;
-            --text-color: #fff;
-            --accent-text: #f9f9f9;
+            --light-text: #ffffff;
+            --accent-text: #f5f5f5;
         }
 
         body {
             margin: 0;
             font-family: 'Poppins', sans-serif;
             background-color: var(--dark-bg);
-            color: var(--text-color);
+            color: var(--light-text);
         }
 
         header.hero {
-            position: relative;
-            height: 60vh;
-            background: url("{% static 'images/about-hero.jpg' %}") center/cover no-repeat;
+            height: 50vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: var(--text-color);
+            background-color: var(--dark-bg);
         }
 
         header.hero h1 {
             font-size: 3rem;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 1rem 2rem;
-            border-radius: 10px;
-        }
-
-        nav.breadcrumb {
-            margin-top: 1rem;
-        }
-
-        nav.breadcrumb a {
             color: var(--primary-red);
-            text-decoration: none;
-            font-weight: 500;
+            border-bottom: 3px solid var(--primary-red);
+            padding-bottom: 0.5rem;
         }
 
         main.about-content {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 2rem auto;
             padding: 0 1rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
         }
 
         .about-section {
-            background-color: var(--light-bg);
-            color: #1a1a1a;
+            background-color: #252525;
             border-radius: 10px;
             padding: 2rem;
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
             transition: transform 0.3s ease;
         }
 
@@ -75,15 +58,16 @@
             transform: translateY(-5px);
         }
 
-        .about-section img {
-            max-width: 100%;
-            border-radius: 10px;
+        .about-section h2 {
+            color: var(--primary-red);
+            font-size: 1.8rem;
             margin-bottom: 1rem;
         }
 
-        .about-section h2 {
-            margin-top: 0;
-            color: var(--primary-red);
+        .about-section p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--accent-text);
         }
 
         footer.footer {
@@ -91,6 +75,7 @@
             padding: 2rem 1rem;
             background-color: #111;
             color: var(--accent-text);
+            margin-top: 3rem;
         }
 
         @media(max-width:768px){
@@ -108,17 +93,17 @@
     <main class="about-content">
         <div class="about-section">
             <h2>Our Story</h2>
-            <p>DOM Pizza was founded with a simple idea: everyone deserves the freedom to craft their perfect pizza. From humble beginnings in a small local kitchen, we embraced the philosophy of customization and quality. We wanted to create a place where creativity meets flavor, and where every customer could enjoy a unique culinary experience. Over the years, our commitment to fresh ingredients, bold flavors, and innovative recipes has allowed us to grow while maintaining the personal touch that makes DOM Pizza feel like home.</p>
+            <p>DOM Pizza was founded with one simple idea: everyone should have the freedom to create their perfect pizza. What started as a small local kitchen with a passion for fresh ingredients has grown into a community-centered brand where every slice is crafted with care. We believe in bold flavors, limitless creativity, and creating experiences that bring people together around the table. Our journey is fueled by the love for pizza and the joy of sharing it with friends, families, and communities everywhere.</p>
         </div>
 
         <div class="about-section">
             <h2>Our Mission</h2>
-            <p>At DOM Pizza, our mission is to bring people together through the love of pizza. We strive to create a dining experience that is fast, fresh, and fully customizable, without ever compromising on quality. From sourcing locally where possible to experimenting with new flavor combinations, our goal is to delight every customer and create memorable moments. We are committed to sustainability, community engagement, and making sure that every pizza we serve is not just a meal, but an experience worth savoring.</p>
+            <p>At DOM Pizza, our mission is to redefine the pizza experience by combining speed, quality, and creativity. We aim to serve pizzas that are not only delicious but also fully customizable to each customer’s preferences. From locally sourced ingredients to innovative flavor combinations, we focus on excellence in every bite. We strive to create an inclusive space where everyone feels welcome, celebrating the simple joy of pizza while continuously pushing the boundaries of taste and freshness.</p>
         </div>
 
         <div class="about-section">
             <h2>Our Team</h2>
-            <p>Our team at DOM Pizza is made up of passionate individuals who love what they do. From our skilled dough makers and expert chefs to our dedicated delivery drivers and customer service staff, every member contributes to creating an exceptional experience. We foster a culture of creativity, collaboration, and respect, encouraging our team to innovate and bring new ideas to the table. Our shared goal is simple: ensure that every guest leaves with a smile, a satisfied appetite, and a desire to come back for more.</p>
+            <p>Every member of the DOM Pizza family is passionate about delivering an exceptional pizza experience. From our skilled dough makers and sauce artisans to our customer service and digital operations teams, each person plays a crucial role in making our vision a reality. We foster a collaborative, creative, and fun work environment, where innovation is encouraged, and dedication to quality is a shared value. Together, we work tirelessly to ensure that every customer enjoys a pizza experience that is as memorable as it is delicious.</p>
         </div>
     </main>
 
