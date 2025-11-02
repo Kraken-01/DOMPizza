@@ -48,6 +48,7 @@
             {% for category in categories %}
             <a href="#{{ category.name|slugify }}" class="nav-link">{{ category.name }}</a>
             {% endfor %}
+            <a href="{% url 'pizza_menu:about' %}" class="nav-link">About Us</a>
         </div>
     </nav>
 
