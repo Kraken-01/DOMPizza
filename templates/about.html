@@ -1,7 +1,39 @@
-{% extends 'base.html' %}
-{% block content %}
-<section class="about-section">
-  <h1>About Us</h1>
-  <p>Welcome to our pizza kitchen! We’re passionate about fresh ingredients, fast service, and bold flavors. Our mission is to bring you the best custom pizzas made your way.</p>
-</section>
-{% endblock %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | DOM Pizza</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="header">
+        <h1>About DOM Pizza</h1>
+        <nav>
+            <a href="{% url 'home' %}">Back to Menu</a>
+        </nav>
+    </header>
+
+    <main class="about-content">
+        <section>
+            <h2>Our Story</h2>
+            <p>DOM Pizza was founded on one idea — that everyone should have the freedom to create their perfect pizza, with unlimited toppings and bold flavors.</p>
+        </section>
+
+        <section>
+            <h2>Our Mission</h2>
+            <p>We strive to bring people together through pizza that’s fast, fresh, and completely customizable.</p>
+        </section>
+
+        <section>
+            <h2>Our Team</h2>
+            <p>Every member of the DOM Pizza family shares a passion for quality and community. From our dough makers to our digital developers — we’re all about great experiences.</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 DOM Pizza. Built with Django.</p>
+    </footer>
+</body>
+</html>
