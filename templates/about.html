@@ -6,30 +6,123 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | DOM Pizza</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        :root {
+            --primary-red: #e31837;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f5f5f5;
+            --text-color: #fff;
+            --accent-text: #f9f9f9;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+        }
+
+        header.hero {
+            position: relative;
+            height: 60vh;
+            background: url("{% static 'images/about-hero.jpg' %}") center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-color);
+        }
+
+        header.hero h1 {
+            font-size: 3rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+        }
+
+        nav.breadcrumb {
+            margin-top: 1rem;
+        }
+
+        nav.breadcrumb a {
+            color: var(--primary-red);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        main.about-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .about-section {
+            background-color: var(--light-bg);
+            color: #1a1a1a;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .about-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .about-section img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .about-section h2 {
+            margin-top: 0;
+            color: var(--primary-red);
+        }
+
+        footer.footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background-color: #111;
+            color: var(--accent-text);
+        }
+
+        @media(max-width:768px){
+            header.hero h1{
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
+    <header class="hero">
         <h1>About DOM Pizza</h1>
-        <nav>
-            <a href="{% url 'pizza_menu:about' %}" class="nav-link">About Us</a>
-        </nav>
     </header>
 
     <main class="about-content">
-        <section>
+        <div class="about-section">
+            <img src="{% static 'images/our-story.jpg' %}" alt="Our Story">
             <h2>Our Story</h2>
-            <p>DOM Pizza was founded on one idea — that everyone should have the freedom to create their perfect pizza, with unlimited toppings and bold flavors.</p>
-        </section>
+            <p>DOM Pizza was founded on one idea — everyone deserves the freedom to create their perfect pizza, with unlimited toppings and bold flavors. Our journey started with a simple passion for great pizza and strong community values.</p>
+        </div>
 
-        <section>
+        <div class="about-section">
+            <img src="{% static 'images/our-mission.jpg' %}" alt="Our Mission">
             <h2>Our Mission</h2>
-            <p>We strive to bring people together through pizza that’s fast, fresh, and completely customizable.</p>
-        </section>
+            <p>We strive to bring people together through pizza that’s fast, fresh, and completely customizable. Every slice is made with care, quality ingredients, and a commitment to flavor innovation.</p>
+        </div>
 
-        <section>
+        <div class="about-section">
+            <img src="{% static 'images/our-team.jpg' %}" alt="Our Team">
             <h2>Our Team</h2>
-            <p>Every member of the DOM Pizza family shares a passion for quality and community. From our dough makers to our digital developers — we’re all about great experiences.</p>
-        </section>
+            <p>Every member of the DOM Pizza family shares a passion for excellence and community. From our dough makers to our digital developers, we focus on crafting the best pizza experience possible.</p>
+        </div>
     </main>
 
     <footer class="footer">
