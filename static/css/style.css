@@ -657,3 +657,21 @@ body {
     background-color: rgba(0, 0, 0, 0.7);
     color: #ff4b4b; /* lighter red on hover */
 }
+
+.back-to-menu {
+    position: fixed;       /* Keeps it in place while scrolling */
+    top: 20px;             /* Distance from top */
+    left: 20px;            /* Distance from left */
+    background-color: var(--primary-red);
+    color: var(--light-text);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    z-index: 1000;         /* Always on top */
+    transition: background-color 0.2s;
+}
+
+.back-to-menu:hover {
+    background-color: var(--primary-red-hover);
+}
