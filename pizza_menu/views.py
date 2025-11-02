@@ -14,7 +14,7 @@ def menu_view(request):
     }
     return render(request, 'menu.html', context)
 
-def about(request):
+def about_view(request):
     return render(request, 'about.html')
 
 def checkout_view(request):
