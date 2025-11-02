@@ -188,11 +188,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Smooth scroll for nav links
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+    link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+
+        if (href.startsWith('#')) {
+            // Only smooth scroll for anchors
             e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
+            const targetSection = document.querySelector(href);
             if (targetSection) {
                 targetSection.scrollIntoView({
                     behavior: 'smooth',
@@ -203,8 +205,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 navLinks.forEach(l => l.classList.remove('active'));
                 this.classList.add('active');
             }
-        });
+        }
+        // If href is a normal URL (like /about/), let it navigate
     });
+});
     
     // Highlight active section on scroll
     const sections = document.querySelectorAll('.menu-section');
