@@ -15,7 +15,9 @@ def menu_view(request):
     return render(request, 'menu.html', context)
 
 def about_view(request):
-    return render(request, 'about.html')
+    categories = Category.objects.all()
+    return render(request, 'about.html', {'categories': categories})
+    
 
 def checkout_view(request):
     """Checkout page view"""
