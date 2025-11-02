@@ -22,7 +22,6 @@ class Command(BaseCommand):
             {'name': 'Beverages', 'description': '', 'order': 6},
             {'name': 'Desserts', 'description': '', 'order': 7},
             {'name': 'Extras', 'description': '', 'order': 8},
-            {'name': 'About Us', 'description': 'Learn more about our story and values', 'order': 9},
         ]
         
         for cat_data in categories:
