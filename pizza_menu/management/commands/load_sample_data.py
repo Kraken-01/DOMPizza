@@ -5,7 +5,7 @@ class Command(BaseCommand):
     help = 'Load sample menu data'
 
     def handle(self, *args, **kwargs):
-        self.stdout.write('Loading sample data...')
+        self.stdout.write('LoaDinnerg sample data...')
         
         # Clear existing data
         MenuItem.objects.all().delete()
@@ -14,7 +14,7 @@ class Command(BaseCommand):
         
         # Create Categories
         categories = [
-            {'name': 'din and a Movie', 'description': 'Perfect combo meals for your evening', 'order': 1},
+            {'name': 'Dinner and a Movie', 'description': 'Perfect combo meals for your evening', 'order': 1},
             {'name': 'Pizza', 'description': 'Create Your Own With Unlimited Toppings...Or Save Some $$ With Our Everyday Pizza Deals...Or Customize One Of Our Signature Pizzas', 'order': 2},
             {'name': 'Salads', 'description': 'Create Your Own With Unlimited Toppings, Or Customize One Of Our Signature Salads', 'order': 3},
             {'name': 'Kids Meal', 'description': 'Because parents shouldn\'t have to share their pizza', 'order': 4},
@@ -22,6 +22,7 @@ class Command(BaseCommand):
             {'name': 'Beverages', 'description': '', 'order': 6},
             {'name': 'Desserts', 'description': '', 'order': 7},
             {'name': 'Extras', 'description': '', 'order': 8},
+            {'name': 'About Us', 'description': 'Learn more about our story and values', 'order': 9},
         ]
         
         for cat_data in categories:
@@ -29,9 +30,9 @@ class Command(BaseCommand):
         
         # Create Menu Items
         menu_items = [
-            # din and a Movie
+            # Dinner and a Movie
             {
-                'category': 'din and a Movie',
+                'category': 'Dinner and a Movie',
                 'name': 'Pizza for 2 Combo',
                 'description': 'Customize two MOD-sized pizzas with unlimited toppings for one price. Choose from over 40 toppings and 8 finishing sauces! Includes your choice of two 20oz Coca-Cola bottled beverages.',
                 'price': 29.99,
@@ -40,7 +41,7 @@ class Command(BaseCommand):
                 'order': 1
             },
             {
-                'category': 'din and a Movie',
+                'category': 'Dinner and a Movie',
                 'name': 'Salad for 2 Combo',
                 'description': 'Customize two MOD-sized salads with unlimited toppings for one price. Choose from over 40 toppings and 8 salad dressings! Includes your choice of two 20oz Coca-Cola bottled beverages.',
                 'price': 24.99,
@@ -49,7 +50,7 @@ class Command(BaseCommand):
                 'order': 2
             },
             {
-                'category': 'din and a Movie',
+                'category': 'Dinner and a Movie',
                 'name': 'Mega Cookie',
                 'description': 'Sliced into 6 big pieces, the warm and gooey chocolatey Mega Cookie is perfect to share (or not)!',
                 'price': 6.99,
