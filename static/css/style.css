@@ -634,3 +634,18 @@ body {
     }
 }
 
+/* Back to Menu Link */
+.back-nav {
+    padding: 1rem 2rem;
+}
+
+.back-nav a {
+    color: var(--primary-red);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.back-nav a:hover {
+    color: #ff4b4b; /* optional lighter red on hover */
+}
