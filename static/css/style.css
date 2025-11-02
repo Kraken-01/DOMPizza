@@ -636,16 +636,24 @@ body {
 
 /* Back to Menu Link */
 .back-nav {
-    padding: 1rem 2rem;
+    position: absolute; /* fixed in upper-left */
+    top: 20px;          /* distance from top */
+    left: 20px;         /* distance from left */
+    z-index: 200;       /* above other content */
 }
 
 .back-nav a {
     color: var(--primary-red);
     text-decoration: none;
-    font-weight: 600;
-    transition: color 0.2s;
+    font-size: 1.2rem;   /* make it larger */
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    background-color: rgba(0, 0, 0, 0.5); /* optional: make it stand out */
+    border-radius: 8px;
+    transition: all 0.2s;
 }
 
 .back-nav a:hover {
-    color: #ff4b4b; /* optional lighter red on hover */
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #ff4b4b; /* lighter red on hover */
 }
